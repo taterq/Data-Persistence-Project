@@ -17,6 +17,7 @@ public class MainManager : MonoBehaviour
     private int m_Points;
     
     private bool m_GameOver = false;
+    [SerializeField] private ScoreRank scoreRank;
 
     
     // Start is called before the first frame update
@@ -36,6 +37,7 @@ public class MainManager : MonoBehaviour
                 brick.onDestroyed.AddListener(AddPoint);
             }
         }
+        scoreRank = GameObject.Find("ScoreRank").GetComponent<ScoreRank>();
     }
 
     private void Update()
@@ -72,5 +74,8 @@ public class MainManager : MonoBehaviour
     {
         m_GameOver = true;
         GameOverText.SetActive(true);
+        scoreRank.instance.NewScore(scoreRank.instance.data.currentPlayer,m_Points);
     }
+
+    
 }
